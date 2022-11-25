@@ -16,3 +16,16 @@ function add(url) {
   };
   xhr.send(json);
 }
+
+function addimage() {
+  var i = document.getElementById("i");
+  const apikey = "key";
+  const client = filestack.init(apikey);
+  const options = {
+    maxFiles: 20,
+    uploadInBackground: false,
+    onOpen: () => console.log("opened!"),
+    onUploadDone: (res) => (i.value = res.filesUploaded[0].url),
+  };
+  client.picker(options).open();
+}
