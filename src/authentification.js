@@ -49,3 +49,23 @@ function singup(url) {
   };
   xhr.send(json);
 }
+
+function getUser() {
+  var id = localStorage.getItem("idU");
+
+  // Post a user
+  var url3 = "http://127.0.0.1:3000/users/" + id;
+  var xhr3 = new XMLHttpRequest();
+  xhr3.open("GET", url3, true);
+
+  xhr3.onload = function () {
+    var admins = JSON.parse(xhr3.responseText);
+    if (xhr3.readyState == 4 && xhr3.status == "200") {
+      document.getElementById("username").value = admins.username;
+      document.getElementById("phone").value = admins.phone;
+      document.getElementById("email").value = admins.email;
+    }
+  };
+
+  xhr3.send(null);
+}
